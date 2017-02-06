@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.contrib.auth import (
   authenticate,
@@ -6,7 +6,7 @@ from django.contrib.auth import (
   login,
   logout,)
 
-from .forms import UserLoginForm
+from .forms import UserLoginForm, UserRegisterForm
 
 
 def login_view(request):
@@ -14,12 +14,30 @@ def login_view(request):
     if form.is_valid():
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-    return render(request, "form.html", {"form":form, "title":title})
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('/')
+
+    return render(request, "form.html", {"form":form})
+
 
 def register_view(request):
-    return render(requets, "form.html", {})
+    title = "Регистрация"
+    form = UserRegisterForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        password = form.cleaned_data.get('password')
+        user.set_password(password)
+        user.save()
+        new_user = authenticate(username=user.username, password=password)
+        login(request,new_user)
+        return redirect('/')
+
+    return render(request, "form.html", {"form":form})
+
 
 def logout_view(request):
-    return render(requets, "form.html", {})
+    logout(request)
+    return redirect('/')
 
 # Create your views here.
