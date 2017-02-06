@@ -14,7 +14,7 @@ def login_view(request):
     if form.is_valid():
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-    return render(request, "form.html", {})
+    return render(request, "form.html", {"form":form, "title":title})
 
 def register_view(request):
     return render(requets, "form.html", {})
