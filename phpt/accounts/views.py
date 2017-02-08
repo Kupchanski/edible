@@ -9,6 +9,10 @@ from django.contrib.auth import (
 from .forms import UserLoginForm, UserRegisterForm
 
 
+def home_view(request):
+    return render(request, "home.html", {})
+
+
 def login_view(request):
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
