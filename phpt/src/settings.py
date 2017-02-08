@@ -129,7 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root"),
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static_root")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static", "static_our"),
@@ -137,5 +137,6 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media", "media_root"),
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media", "media_root")
+
 SITE_ID = 1
