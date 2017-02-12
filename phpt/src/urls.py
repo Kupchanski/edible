@@ -18,13 +18,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from accounts import views as acc_views
+from carts.views import CategoryView, CategoryDetailView
 
 urlpatterns = [
     url(r'^$', acc_views.home_view, name="home"),
     url(r'^admin/', admin.site.urls),
+    url(r'^contact/', acc_views.contact_view, name="contact"),
     url(r'^login/', acc_views.login_view, name="login"),
     url(r'^logout/', acc_views.logout_view, name="logout"),
-    url(r'^reg/', acc_views.register_view, name="reg"),
+
+    url(r'^categories/$', CategoryView.as_view(), name="category"),
+    url(r'^categories/(?P<pk>[\d]+)/$', CategoryDetailView.as_view(), name="category_detail"),
 
 ]
 # if settings.DEBUG:

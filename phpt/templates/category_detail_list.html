@@ -1,0 +1,9 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>{{obj.name}}</h2>
+    <ul>
+        <li>{{ category_list }}</li>
+
+    </ul>
+{% endblock content %}

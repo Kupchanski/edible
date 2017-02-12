@@ -6,6 +6,13 @@ from django.contrib.auth import (
   logout,)
 User = get_user_model()
 
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=120, required=False)
+    email = forms.EmailField()
+    message = forms.CharField()
+
+
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
