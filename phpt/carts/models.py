@@ -1,3 +1,4 @@
+from PIL import Image
 from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -15,6 +16,8 @@ CARTS_COLORS = (
     ('Red', 'Red'),
     ('Green', 'Green')
 )
+
+_MAX_SIZE = 100
 
 def get_deleted_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
@@ -35,3 +38,29 @@ class Carts(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        # Сначала - обычное сохранение
+        super(Carts, self).save(*args, **kwargs)
+
+        # Проверяем, указан ли логотип
+        if self.img:
+            filename = self.img.path
+            width = self.img.width
+            height = self.img.height
+
+            max_size = max(width, height)
+
+            # Может, и не надо ничего менять?
+            if max_size > _MAX_SIZE:
+                # Надо, Федя, надо
+                image = Image.open(filename)
+                # resize - безопасная функция, она создаёт новый объект, а не
+                # вносит изменения в исходный, поэтому так
+                image = image.resize(
+                    (round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
+                    round(height / max_size * _MAX_SIZE)),
+                    Image.ANTIALIAS
+                )
+                # И не забыть сохраниться
+                image.save(filename)

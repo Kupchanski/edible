@@ -19,5 +19,5 @@ class CategoryDetailView(DetailView):
             context = super().get_context_data(**kwargs)
             # Add in a QuerySet of all the books
             context['obj'] = self.get_object()
-            context['category_list'] = Carts.objects.filter(cart__category=self.get_object().name)
+            context['category_list'] = Carts.objects.filter(category__name=context['obj'].name)
             return context

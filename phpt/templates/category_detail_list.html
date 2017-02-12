@@ -2,8 +2,20 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h2>{{obj.name}}</h2>
-    <ul>
-        <li>{{ category_list }}</li>
 
-    </ul>
+        {% for item in category_list %}
+  <ul>
+      <a href="/" >{{ item.title }}</a>
+        {% if item.img %}
+        <img src="{{ item.img.url }}" class="img-responsive"/>
+      {% endif %}
+
+      <br/>
+         {{ item.place }}
+       <br/>
+         {{ item.comment }}
+</ul>
+<hr/>
+{% endfor%}
+
 {% endblock content %}
