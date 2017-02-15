@@ -5,7 +5,7 @@
 
         {% for item in category_list %}
   <ul>
-      <a href="/" >{{ item.title }}</a>
+      <a href={{item.get_absolute_url}}  >{{ item.title }}</a>
         {% if item.img %}
         <img src="{{ item.img.url }}" class="img-responsive"/>
       {% endif %}

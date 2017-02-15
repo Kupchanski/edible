@@ -1,6 +1,7 @@
 from PIL import Image
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 
 # Create your models here.
@@ -39,6 +40,9 @@ class Carts(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("carts_detail", kwargs={"category_slug": self.category.slug, "pk": self.pk})
 
     def save(self, *args, **kwargs):
         # Сначала - обычное сохранение

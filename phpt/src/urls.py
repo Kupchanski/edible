@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from accounts import views as acc_views
-from carts.views import CategoryView, CategoryDetailView
+from carts.views import CategoryView, CategoryDetailView, CartsDetailView
 
 urlpatterns = [
     url(r'^$', acc_views.home_view, name="home"),
@@ -29,6 +29,7 @@ urlpatterns = [
 
     url(r'^categories/$', CategoryView.as_view(), name="category"),
     url(r'^categories/(?P<slug>[\w-]+)/$', CategoryDetailView.as_view(), name="category_detail"),
+    url(r'^products/(?P<category_slug>[\w-]+)/(?P<pk>[\d]+)/$', CartsDetailView.as_view(), name="carts_detail"),
 
 ]
 if settings.DEBUG:
