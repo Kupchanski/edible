@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 
 class Category(models.Model):
     name = models.CharField(max_length=120,  blank=False)
+    slug = models.SlugField(default="categ")
 
     def __str__(self):
         return self.name

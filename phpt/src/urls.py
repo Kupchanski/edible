@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^logout/', acc_views.logout_view, name="logout"),
 
     url(r'^categories/$', CategoryView.as_view(), name="category"),
-    url(r'^categories/(?P<pk>[\d]+)/$', CategoryDetailView.as_view(), name="category_detail"),
+    url(r'^categories/(?P<slug>[\w-]+)/$', CategoryDetailView.as_view(), name="category_detail"),
 
 ]
 if settings.DEBUG:
