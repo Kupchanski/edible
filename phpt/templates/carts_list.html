@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Товары</h2>
+    <ul>
+        {% for cart in object_list %}
+            <li><a href={{ cart.get_absolute_url }} >{{ cart.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

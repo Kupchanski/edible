@@ -18,7 +18,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from accounts import views as acc_views
-from carts.views import CategoryView, CategoryDetailView, CartsDetailView
+from carts.views import CategoryView, CategoryDetailView, CartsDetailView, CartsView, \
+                        add_to_red_cart, add_to_green_cart, cart_update_view
 
 urlpatterns = [
     url(r'^$', acc_views.home_view, name="home"),
@@ -28,8 +29,12 @@ urlpatterns = [
     url(r'^logout/', acc_views.logout_view, name="logout"),
 
     url(r'^categories/$', CategoryView.as_view(), name="category"),
+    url(r'^products/$', CartsView.as_view(), name="carts"),
+    url(r'^products/add_red$', add_to_red_cart, name="add_carts"),
+    url(r'^products/add_green$', add_to_green_cart, name="add_carts"),
     url(r'^categories/(?P<slug>[\w-]+)/$', CategoryDetailView.as_view(), name="category_detail"),
-    url(r'^products/(?P<category_slug>[\w-]+)/(?P<pk>[\d]+)/$', CartsDetailView.as_view(), name="carts_detail"),
+    url(r'^categories/(?P<category_slug>[\w-]+)/(?P<pk>[\d]+)/$', CartsDetailView.as_view(), name="carts_detail"),
+    url(r'^categories/(?P<category_slug>[\w-]+)/(?P<pk>[\d]+)/update', cart_update_view, name="add_carts"),
 
 ]
 if settings.DEBUG:

@@ -30,6 +30,7 @@ class Carts(models.Model):
     category = models.ForeignKey("Category")
     cart_color = models.CharField(max_length=5, choices=CARTS_COLORS, default='Red')
     title = models.CharField(max_length=120)
+    developer = models.CharField(max_length=120)
     img = models.ImageField(height_field='img_height', width_field='img_width', blank=True, verbose_name="Изображение товара")
     img_height = models.PositiveIntegerField(default=200)
     img_width = models.PositiveIntegerField(default=200)

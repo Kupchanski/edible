@@ -5,15 +5,15 @@
 
 
   <ul>
-      <a href="/" >{{ cart_obj.title }}</a>
+
         {% if cart_obj.img %}
-        <img src="{{ cart_obj.img.url }}" class="img-responsive"/>
+        <img src={{ cart_obj.img.url }} class="img-responsive"/>
       {% endif %}
 
       <br/>
          {{ cart_obj.place }}
        <br/>
-         {{ obj.comment }}
+         {{ cart_obj.comment }}
 </ul>
 <hr/>
 
